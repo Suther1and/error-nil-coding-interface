@@ -7,8 +7,7 @@
 
 import UIKit
 
-public var userName = ""
-public var userSurname = ""
+ 
 
 class ViewController: UIViewController {
     
@@ -27,6 +26,8 @@ class ViewController: UIViewController {
     //    let btnAction: UIAction = UIAction { btn in
     //           present(GreetingScreen, animated: true)
     //        }
+    var nameField = UITextField()
+    var surnameField = UITextField()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,21 +47,23 @@ class ViewController: UIViewController {
         
         
         
-        let nameField = UITextField()
+         
         nameField.frame = CGRect(x: 15, y: 359, width: 364, height: 50)
-        nameField.placeholder = "      Имя"
+        nameField.placeholder = "Имя"
         nameField.layer.cornerRadius = 25
         nameField.backgroundColor = .white
-        userName = nameField.text ?? "-"
+        nameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 1))
+        nameField.leftViewMode = .always
         
-        
-        let surnameField = UITextField()
+         
         surnameField.frame = CGRect(x: 15, y: 430, width: 364, height: 50)
-        surnameField.placeholder = "      Фамилия"
+        surnameField.placeholder = "Фамилия"
         surnameField.layer.cornerRadius = 25
         surnameField.backgroundColor = .white
-        userSurname = surnameField.text ?? "-"
-        
+        surnameField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: 1))
+        surnameField.leftViewMode = .always
+
+ 
         let authLabel = UILabel()
         authLabel.frame = CGRect(x: 33, y: 222, width: 201, height: 36)
         authLabel.text = "Авторизация"
@@ -102,10 +105,11 @@ class ViewController: UIViewController {
     }
     
     @objc func didTapButton(){
-        let storyboard = UIStoryboard(name: "GreetingScreen", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "GreetingScreen") as! GreetingScreen
+       // let storyboard = UIStoryboard(name: "GreetingScreen", bundle: nil)
+        let vc = GreetingScreen()
+          
 
-        
+        vc.greetingMessage.text = (nameField.text ?? "-") + " " + (surnameField.text ?? "-")
         present(vc, animated: true)
         
     }
